@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+  pythonapp:
+    build: ./python/
+    command: sh -c "python3 ./app.py"
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      MYSQL_DB: youtube
+    ports:
+      - '5000:5000'
+    depends_on:
+      - mysql
+    networks:
+      - ytnet
+  
+  mysql:
+    build: ./mysql/
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: youtube
+    networks:
+      - ytnet
+    ports:
+      - '3306:3306'
+
+networks: 
+  ytnet:
+    external: true
