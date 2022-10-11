@@ -1,0 +1,320 @@
+/* Google Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+:root{
+    /* ===== Colors ===== */
+    --body-color: #F3F6F9;
+    --sidebar-color: #FFF;
+    --primary-color: #695CFE;
+    --primary-color-light: #F6F5FF;
+    --toggle-color: #DDD;
+    --text-color: #707070;
+    --body-font-family:"Roboto",sans-serif;
+    --body-font-weight:400;
+    --body-font-size:0.825rem;
+    --body-line-height:1.5;
+
+    /* ====== Transition ====== */
+    --tran-03: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.3s ease;
+    --tran-05: all 0.3s ease;
+}
+
+body{
+    min-height: 100vh;
+    background-color: var(--body-color);
+    transition: var(--tran-05);
+    font-family: var(--body-font-family);
+    font-size: var(--body-font-size);
+    font-weight: var(--body-font-weight);
+    line-height: var(--body-line-height);
+}
+
+::selection{
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.header {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    width: 100%;
+    padding: 15px;
+    background: var(--sidebar-color);
+}
+.left {
+ display: flex;
+ align-items: center;
+}
+
+.left #menu {
+ padding: 0 7px;
+ cursor: pointer;
+}
+
+.header .bx{
+    font-size: 30px;
+}
+.icons.right a{
+    text-decoration: none;
+    color: black;
+}
+.bxs-user-circle{
+    font-size: 32px;
+}
+
+/* ===== Sidebar ===== */
+ .sidebar{
+    top: 56px;
+    left: 0;
+    height: 100vh;
+    width: 163px;
+    padding: 10px 14px;
+    background: var(--sidebar-color);
+    transition: var(--tran-05);
+    z-index: 100; 
+    position: fixed; 
+}
+.sidebar.close{
+    width: 72px;
+}
+
+/* ===== Reusable code - Here ===== */
+.sidebar li{
+    height: 50px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    width: 135px;
+    overflow-wrap: break-word;
+}
+
+.sidebar header
+{
+    min-width: 60px;
+    border-radius: 6px;
+}
+
+.sidebar .icon{
+    min-width: 40px;
+    border-radius: 6px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.sidebar .text,
+.sidebar .icon{
+    color: var(--text-color);
+    transition: var(--tran-03);
+}
+
+.sidebar .text{
+    font-size: 17px;
+    font-weight: 500;
+    white-space: normal;
+    opacity: 1;
+}
+.sidebar.close .text{
+    opacity: 0;
+}
+/* =========================== */
+
+.sidebar header{
+    position: relative;
+}
+
+.sidebar.close .toggle{
+    transform: translateY(-50%) rotate(0deg);
+}
+
+.sidebar li a{
+    list-style: none;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: var(--tran-03);
+}
+
+.sidebar li a:hover,
+.sidebar li.currentpage a{
+    background-color: var(--primary-color);
+}
+.sidebar li a:hover .icon,
+.sidebar li a:hover .text,
+.sidebar li.currentpage a .icon,
+.sidebar li.currentpage a .text{
+    color: var(--sidebar-color);
+}
+
+.menu-links{
+    padding-left: 0;
+}
+
+.sidebar .menu-bar{
+    height: calc(100% - 55px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: scroll;
+}
+.menu-bar::-webkit-scrollbar{
+    display: none;
+}
+
+.content{
+    position: absolute;
+    top: 0;
+    top: 0;
+    margin-top: 56px;
+    padding-top: 10px;
+    left: 163px;
+    height: 100%;
+    width: calc(100% - 163px);
+    background-color: var(--body-color);
+    transition: var(--tran-05);
+}
+.content .text{
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text-color);
+    padding: 12px 60px;
+}
+
+.sidebar.close ~ .content{
+    left: 72px;
+    height: 100vh;
+    width: calc(100% - 72px);
+}
+.video{
+    position: absolute;
+    left: 92px;
+    width: calc(100% - 92px);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+}
+.sidebar.close ~ .content .video{
+    left: 183px;
+    width: calc(100% - 183px);
+}
+.keywordTags{
+    position: fixed;
+    height: 90vh;
+    width: 90px;
+    flex-direction: column;
+    align-items: center;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    border-left: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    background-color: var(--sidebar-color);
+    margin-top: -5px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    justify-content: flex-start;
+    padding: 0px;
+
+}
+
+.sidebar.close ~ .content .keywordTags{
+    width: 185px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.sidebar.close ~ .content .keywordTags #search {
+    width: 167px;
+}
+
+.keywordTags form button{
+    height: 42px;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    margin: 12px 6px;
+    text-transform: capitalize;
+}
+/* .keywordTags::-webkit-scrollbar{
+    display: none;
+} */
+.content p.title{
+    padding-left: 10px;
+    white-space: normal; 
+    font-size: 14.4px;
+    width: 204px;
+    height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.content p.time{
+    padding-left: 10px;
+}
+.content p.title a{
+    text-decoration: none;
+    color: #212529;
+    align-items: flex-start;
+}
+.videos{
+    width: 216px;
+}
+.videos{
+    padding: 10px;
+}
+
+#search{
+    width: 86px;
+}
+
+.card{
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 48px 40px 36px;
+  }
+  
+  svg{
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+.form-inline{
+    align-items: center;
+}
+button.btn.btn-dark.rounded-pill ,
+button.btn.btn-primary.rounded-pill{
+    padding: 5px;
+    margin: 10px 0px;
+    width: 67px;
+}
+
+.sidebar.close ~ .content .keywordTags button.btn.btn-dark.rounded-pill,
+.sidebar.close ~ .content .keywordTags button.btn.btn-primary.rounded-pill{
+    min-width: 100px;
+}
+
+.float-right{
+    width: 100%;
+}
+.right{
+    float: right;
+}
+.bs-example {
+    margin: 20px;
+}
+ 
+.modal-content iframe {
+    margin: 0 auto;
+    display: block;
+}

@@ -1,0 +1,42 @@
+#1 creating a database.
+
+CREATE DATABASE youtube;
+
+
+#2 creating a table to store username and password.
+
+CREATE TABLE youtube.user (
+  user INT NOT NULL AUTO_INCREMENT,
+  username VARCHAR(300) NOT NULL,
+  password VARCHAR(300) NOT NULL,
+  PRIMARY KEY (user),
+  UNIQUE INDEX username_UNIQUE (username ASC) VISIBLE);
+
+
+#3 creating a table to store the search group and keywords:
+
+CREATE TABLE youtube.groups_keywords (
+  user_id INT NOT NULL,
+  group_name VARCHAR(300) NOT NULL,
+  keyword VARCHAR(300) NOT NULL,
+  PRIMARY KEY (user_id, group_name, keyword));
+
+
+#4 creating a table to store the default values:
+
+CREATE TABLE youtube.default_values (
+  userId INT NOT NULL,
+  group_name VARCHAR(300) NOT NULL,
+  keyword VARCHAR(300) NOT NULL,
+  PRIMARY KEY (userId));
+
+#5 creating a table to store saved/bookmarked values:
+
+CREATE TABLE youtube.bookmark (
+  user_id INT NOT NULL,
+  title VARCHAR(300) NOT NULL,
+  url VARCHAR(300) NOT NULL,
+  PRIMARY KEY (user_id, title, url));
+  
+ #extra how to connect docker_mysql container:
+ docker run -p 3307:3306 --name mysql -e MYSQL_ROOT_PASSWORD=password -d mysql-1

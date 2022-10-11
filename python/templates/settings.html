@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!--======== CSS ======== -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+    
+    <!--===== Boxicons CSS ===== -->
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>{% block title %}{% endblock %}</title> 
+</head>
+<body>
+        <header class="header sticky-top">
+            <div class="logo left">
+                <i class='bx bx-menu'></i>
+            </div>
+            <div class="title">
+
+            </div>
+            <div class="icons right">
+                <a href="{{url_for('logout')}}">
+                    <i class='bx bxs-user-circle'></i>
+                </a>
+            </div>
+        </header>
+        <nav class="sidebar">
+            <div class="menu-bar">
+                <div class="menu">
+                    <ul class="menu-links">
+                        <li class="nav-link">
+                            <a href="{{url_for('home')}}">
+                                <i class='bx bx-home-alt icon' ></i>
+                                <span class="text nav-text">Home</span>
+                            </a>
+                        </li>
+    
+                        <li class="nav-link">
+                            <a href="{{url_for('groupList')}}">
+                                <i class='bx bx-bar-chart-alt-2 icon' ></i>
+                                <span class="text nav-text">My Search Group</span>
+                            </a>
+                        </li>
+    
+                        <li class="nav-link">
+                            <a href="{{url_for('addGroup')}}">
+                                <i class='bx bx-bell icon'></i>
+                                <span class="text nav-text">Add Search Group</span>
+                            </a>
+                        </li>
+    
+                        <li class="nav-link currentpage">
+                            <a href="{{url_for('setting')}}">
+                                <i class='bx bx-wrench icon' ></i>
+                                <span class="text nav-text">Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+<section class="content">
+    <div class="container-fluid">
+        <h3 class="text-center">Changing the Default Group And Keyword</h3>
+        <div class="row">
+            <form action="{{ url_for('setting') }}" class="d-flex" method="POST">
+            <div class="col">
+                <h3 class="text-center">Groups</h3>
+                <div class="list-group a-center">
+                    {%for i in groups%}
+                    {%if i[0]==primary_group%}
+                    <div class = "btn-group mt-2 btn btn-primary">
+                        <button type="button" name="group" class="action" id="group" value="{{i[0]}}">
+                            {{i[0]}}
+                        </button>
+                    </div>
+                    {%else%}
+                    <div class = "btn-group mt-2 btn btn-dark">
+                        <button type="button" name="group" class="action" id="group" value="{{i[0]}}">
+                            {{i[0]}}
+                        </button>
+                    </div>
+                    {%endif%}
+                    {%endfor%}
+                  </div>
+            </div>
+            <div class="col">
+                <h3 class="text-center">Keywords</h3>
+                <div>
+                    {%for i in groups%}
+                    {%if i[0]==primary_group%}
+                    <div id="{{i[0]}}">
+                        <ul class="list-group a-center">
+                            {%for j in g%}
+                                {%if j[0] == i[0]%}
+                                {%if j[1]==primary_keyword%}
+                                <div class = "btn-group mt-2 btn btn-primary" value="{{j[0]}},{{j[1]}}">
+                                    <button type="button" name="kwordForDefault" class="keywordForDefault" id="kword">
+                                        {{j[1]}}
+                                    </button>
+                                </div>
+                                {%else%}
+                                <div class = "btn-group mt-2 btn btn-dark" value="{{j[0]}},{{j[1]}}">
+                                    <button type="button" name="kwordForDefault" class="keywordForDefault" id="kword">
+                                        {{j[1]}}
+                                    </button>
+                                </div>
+                                {%endif%}
+                                {%endif%}
+                            {%endfor%}
+                        </ul>
+                        <button type="submit" class="btn btn-primary mt-2 float-right submit" name="defaultUpdate" value="{{primary_group}},{{primary_keyword}}">Set As Default</button>
+                    </div>
+                    {%else%}
+                    <div id="{{i[0]}}" class='d-none'>
+                        <ul class="list-group a-center">
+                            {%for j in g%}
+                                {%if j[0] == i[0]%}
+                                <div class = "btn-group mt-2 btn btn-dark" value="{{j[0]}},{{j[1]}}">
+                                    <button type="button" name="kwordForDefault" class="keywordForDefault" id="kword">
+                                        {{j[1]}}
+                                    </button>
+                                </div>
+                                {%endif%}
+                            {%endfor%}
+                        </ul>
+                        <button type="submit" class="btn btn-primary mt-2 float-right submit" name="defaultUpdate" value="">Set As Default</button>
+                    </div>
+                    {%endif%}
+                    {%endfor%}
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
+</section>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
