@@ -9,7 +9,7 @@ pipeline {
 
     stage('test') {
       steps {
-        sh 'docker-compose up -d'
+        sh 'docker build -f python/Dockerfile'
       }
     }
 
