@@ -9,7 +9,7 @@ pipeline {
 
     stage('test') {
       steps {
-        sh 'ls -al'
+        sh 'docker-compose up -d'
       }
     }
 
