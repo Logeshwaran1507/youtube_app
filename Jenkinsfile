@@ -9,7 +9,7 @@ pipeline {
 
     stage('test') {
       steps {
-        sh 'docker build -f python/Dockerfile'
+        sh 'cd python python3 app.py'
       }
     }
 
